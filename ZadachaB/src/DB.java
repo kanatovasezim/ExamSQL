@@ -1,8 +1,6 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DB {
     private final static String url = "jdbc:postgresql://localhost:5432/";
@@ -56,5 +54,24 @@ public class DB {
             e.printStackTrace();
         }
     }
-
+    public List<News> getNews() {
+        List <News> newsDB = new ArrayList<>();
+        String SQL = "select title, text from news";
+        try (Connection conn = DB.connect();
+             Statement statement = conn.createStatement();
+             ResultSet rs = statement.executeQuery(SQL)) {
+                while (rs.next()) {
+                    News news = new News();
+                    news.setText(rs.getString("TEXT"));
+                    news.setTitle(rs.getString("TITLE"));
+                    newsDB.add(news);
+            } return newsDB;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public void printNews(){
+        System.out.println(getNews());
+    }
 }

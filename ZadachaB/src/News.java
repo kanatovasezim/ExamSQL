@@ -43,11 +43,9 @@ public class News {
 
     @Override
     public String toString() {
-        return "News{" +
-                "title='" + title + '\'' +
-                ", text='" + text + '\'' +
-                ", time_pub='" + time_pub + '\'' +
-                '}';
+        return
+                title +
+                " - " + text ;
     }
 }
 
