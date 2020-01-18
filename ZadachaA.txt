@@ -1,0 +1,29 @@
+
+
+create table buses(
+id serial primary key,
+bus_num varchar(50) not null unique,
+routes int references routes(id) not null);
+
+create table routes(
+id serial primary key,
+bus_routnum integer not null,
+start_route varchar(50) not null,
+end_route varchar(50) not null)
+;
+
+create table drivers(
+id serial primary key,
+fio varchar(60) not null);
+
+create table logs(
+id serial primary key,
+id_driver integer references drivers(id),
+id_bus integer references buses(id),
+log_time timestamp not null
+);
+
+insert into buses(bus_num, routes) values('A 23456 B', 1), ('A 34567 C', 2), ('B 98765 C', 3), ('C 34567 D', 4);
+insert into drivers(fio) values ('Aktan K'), ('Asman O'), ('Sergei R'), ('Lyudmila T');
+insert into routes(bus_routnum, start_route, end_route) values(12, 'AUCA', 'Dordoi'), (35, 'Alamedin', '12-Microregion'), (20, 'TSUM', 'Dzhal'), (33, 'ALa-Archa', 'Zarya');
+insert into logs(id_driver, id_bus, log_time) values (1,1, '01-01-2020 06:12:20'), (2,2, '02-01-2020 12:12:20'), (3,3, '01-01-2020 15:00:20'),(4,4, '12-01-2020 09:00:00');

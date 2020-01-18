@@ -1,0 +1,14 @@
+
+create table news(
+id serial primary key,
+title varchar(150) not null,
+text varchar(250) not null,
+time_pub timestamp not null unique);
+
+insert into news(title, text, time_pub) values ('sas', 'safa', now());
+
+delete from news where id = 1;
+select * from news;
+
+
+
